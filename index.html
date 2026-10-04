@@ -3,938 +3,961 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WEBAK | ساخت اپ، سایت، بات</title>
+<meta name="description" content="WEBAK — طراحی و توسعه سایت، اپلیکیشن، بات و راهکارهای دیجیتال.">
+<title>WEBAK — ایده را به تجربه تبدیل می‌کنیم</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-/* ==================== RESET ==================== */
-*{margin:0;padding:0;box-sizing:border-box;}
+/* =========================================================
+   WEBAK — MODERN STUDIO
+   Single-file HTML / CSS / JS
+========================================================= */
 
 :root{
   --orange:#ff6b00;
-  --orange-2:#ffa500;
-  --orange-3:#ff3d00;
-  --transition:all .35s cubic-bezier(.16,1,.3,1);
-}
-
-[data-theme="dark"]{
-  --bg:#080c15;
-  --bg-2:#0d1420;
-  --bg-3:#131c2e;
-  --text:#e8ecf3;
-  --text-dim:#8a95a8;
-  --text-mute:#5a6478;
-  --glass:rgba(255,255,255,0.025);
-  --glass-2:rgba(255,255,255,0.04);
-  --card-border:rgba(255,255,255,0.05);
-  --nav-bg:rgba(8,12,21,0.7);
+  --orange2:#ff9d2e;
+  --orange3:#ff3d00;
+  --bg:#070a10;
+  --bg2:#0b1019;
+  --bg3:#111925;
+  --text:#f2f5f9;
+  --muted:#8d98aa;
+  --muted2:#5e6a7d;
+  --line:rgba(255,255,255,.075);
+  --glass:rgba(255,255,255,.035);
+  --glass2:rgba(255,255,255,.06);
+  --nav:rgba(7,10,16,.72);
+  --shadow:0 25px 80px rgba(0,0,0,.28);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 
 [data-theme="light"]{
-  --bg:#f7f8fc;
-  --bg-2:#ffffff;
-  --bg-3:#eef1f8;
-  --text:#0d1420;
-  --text-dim:#5a6478;
-  --text-mute:#8a95a8;
-  --glass:rgba(255,255,255,0.7);
-  --glass-2:rgba(255,255,255,0.9);
-  --card-border:rgba(13,20,32,0.06);
-  --nav-bg:rgba(247,248,252,0.75);
+  --bg:#f7f8fb;
+  --bg2:#fff;
+  --bg3:#eef1f6;
+  --text:#101622;
+  --muted:#5d6879;
+  --muted2:#8993a3;
+  --line:rgba(16,22,34,.08);
+  --glass:rgba(255,255,255,.72);
+  --glass2:rgba(255,255,255,.92);
+  --nav:rgba(247,248,251,.78);
+  --shadow:0 25px 70px rgba(20,30,50,.1);
 }
 
-html{scroll-behavior:smooth;overflow-x:hidden;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scrollbar-width:none}
 body{
   font-family:'Vazirmatn',sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.8;
   overflow-x:hidden;
-  line-height:1.75;
   transition:background .5s ease,color .5s ease;
-  position:relative;
-  max-width:100vw;width:100%;
-  -webkit-font-smoothing:antialiased;
 }
+body::-webkit-scrollbar{display:none}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+::selection{background:var(--orange);color:#fff}
 
-/* ==================== HIDE SCROLLBAR ==================== */
-html,body{
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-html::-webkit-scrollbar,
-body::-webkit-scrollbar{
-  display:none;
-  width:0;height:0;
-}
-*::-webkit-scrollbar{display:none;width:0;height:0;}
-
-html,body{max-width:100vw;}
-section,.hero,footer,nav{max-width:100vw;overflow-x:hidden;}
-a{text-decoration:none;color:inherit;}
-::selection{background:var(--orange);color:#fff;}
-
-/* ==================== BACKGROUND ==================== */
 #particles{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  z-index:0;pointer-events:none;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
 }
-.bg-ambient{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:radial-gradient(circle at 15% 10%,rgba(255,107,0,.05) 0%,transparent 45%),
-             radial-gradient(circle at 85% 90%,rgba(255,61,0,.04) 0%,transparent 45%);
-  z-index:-1;pointer-events:none;
+.ambient{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 12%,rgba(255,107,0,.075),transparent 28%),
+    radial-gradient(circle at 88% 80%,rgba(255,61,0,.055),transparent 28%);
 }
-[data-theme="light"] .bg-ambient{
-  background:radial-gradient(circle at 15% 10%,rgba(255,107,0,.06) 0%,transparent 45%),
-             radial-gradient(circle at 85% 90%,rgba(255,61,0,.04) 0%,transparent 45%);
+.grid-bg{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  opacity:.25;
+  pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,black,transparent 75%);
 }
 
-/* ==================== NAVBAR ==================== */
-nav{
-  position:fixed;top:0;left:0;width:100%;z-index:1000;
-  padding:18px 6%;display:flex;justify-content:space-between;align-items:center;
-  transition:var(--transition);gap:20px;
+.container{width:min(1160px,90%);margin:auto}
+section{position:relative;z-index:2;padding:110px 0}
+section[id]{scroll-margin-top:100px}
+
+.nav{
+  position:fixed;
+  top:0;left:0;width:100%;
+  z-index:1000;
+  padding:18px 0;
+  transition:.4s var(--ease);
 }
-nav.scrolled{
-  background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  padding:12px 6%;border-bottom:1px solid var(--card-border);
+.nav.scrolled{
+  padding:11px 0;
+  background:var(--nav);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--line);
 }
-.nav-links{display:flex;gap:32px;list-style:none;flex:1;justify-content:flex-start;}
-[dir="ltr"] .nav-links{justify-content:flex-end;}
+.nav-inner{
+  width:min(1240px,92%);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:28px;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;letter-spacing:3px;
+  font-size:1.05rem;
+}
+.brand-mark{
+  width:31px;height:31px;border-radius:10px;
+  background:linear-gradient(135deg,var(--orange),var(--orange3));
+  box-shadow:0 0 28px rgba(255,107,0,.3);
+  position:relative;
+}
+.brand-mark:after{
+  content:"";
+  position:absolute;
+  inset:7px 6px 6px;
+  border:2px solid #fff;
+  border-top-color:transparent;
+  border-radius:5px;
+  transform:rotate(-15deg);
+}
+.nav-links{
+  display:flex;gap:30px;
+  list-style:none;
+  margin-inline:auto;
+}
 .nav-links a{
-  font-size:.88rem;font-weight:500;color:var(--text-dim);
-  position:relative;transition:color .3s;
+  color:var(--muted);
+  font-size:.84rem;
+  transition:.3s;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-5px;right:0;width:0;height:1px;
-  background:var(--orange);transition:width .35s;
+.nav-links a:hover{color:var(--text)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.icon-btn{
+  width:39px;height:39px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--glass2);
+  color:var(--muted);
+  cursor:pointer;
+  transition:.3s var(--ease);
 }
-[dir="ltr"] .nav-links a::after{right:auto;left:0;}
-.nav-links a:hover{color:var(--text);}
-.nav-links a:hover::after{width:100%;}
-
-.nav-controls{
-  display:flex;align-items:center;gap:8px;flex-shrink:0;
-  flex:1;justify-content:flex-end;
-}
-[dir="ltr"] .nav-controls{justify-content:flex-start;}
-.ctrl-btn{
-  width:38px;height:38px;border-radius:11px;
-  background:var(--glass-2);border:1px solid var(--card-border);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.95rem;cursor:pointer;color:var(--text-dim);
-  transition:var(--transition);
-}
-.ctrl-btn:hover{
-  border-color:rgba(255,107,0,.4);color:var(--orange);
-  transform:translateY(-2px);
-}
-.ctrl-btn .lang-text{
-  font-family:'Montserrat',sans-serif;font-weight:800;font-size:.68rem;
-  letter-spacing:1px;
-}
+.icon-btn:hover{color:var(--orange);border-color:rgba(255,107,0,.35);transform:translateY(-2px)}
 .nav-cta{
-  padding:9px 20px;border-radius:50px;
-  background:transparent;border:1px solid rgba(255,107,0,.4);
-  color:var(--orange);font-weight:600;font-size:.82rem;
-  transition:var(--transition);
+  padding:9px 18px;
+  border:1px solid rgba(255,107,0,.4);
+  color:var(--orange);
+  border-radius:50px;
+  font-size:.8rem;font-weight:700;
+  transition:.3s var(--ease);
 }
-.nav-cta:hover{
-  background:var(--orange);color:#fff;border-color:var(--orange);
-}
-@media(max-width:900px){
-  .nav-links{display:none;}
-  .nav-cta{display:none;}
-  nav{justify-content:flex-end;}
-}
+.nav-cta:hover{background:var(--orange);color:white}
 
-/* ==================== HERO ==================== */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;text-align:center;
-  padding:130px 5% 100px;position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:150px 0 100px;
 }
-
-/* BIG CENTERED LOGO (IMAGE) */
-.hero-logo{
-  display:flex;flex-direction:column;align-items:center;gap:20px;
-  margin-bottom:40px;
-  animation:fadeUp 1.2s cubic-bezier(.16,1,.3,1) .1s both;
+.hero-layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:70px;
+  align-items:center;
 }
-.hero-logo-img{
-  width:200px;
-  height:200px;
-  object-fit:contain;
-  filter:drop-shadow(0 0 40px rgba(255,107,0,.5)) drop-shadow(0 0 80px rgba(255,107,0,.2));
-  transition:all .4s cubic-bezier(.16,1,.3,1);
-  animation:logoGlow 4s ease-in-out infinite;
+.hero-copy{max-width:680px}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 13px;
+  border:1px solid var(--line);
+  background:var(--glass);
+  border-radius:50px;
+  color:var(--muted);
+  font-size:.75rem;
+  margin-bottom:24px;
 }
-.hero-logo-img:hover{
-  transform:scale(1.05);
-  filter:drop-shadow(0 0 60px rgba(255,107,0,.8)) drop-shadow(0 0 120px rgba(255,107,0,.4));
-}
-@keyframes logoGlow{
-  0%,100%{filter:drop-shadow(0 0 40px rgba(255,107,0,.5)) drop-shadow(0 0 80px rgba(255,107,0,.2));}
-  50%{filter:drop-shadow(0 0 60px rgba(255,107,0,.7)) drop-shadow(0 0 120px rgba(255,107,0,.3));}
-}
-
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:7px 18px;border-radius:50px;
-  background:var(--glass);border:1px solid var(--card-border);
-  font-size:.78rem;color:var(--text-dim);margin-bottom:28px;
-  animation:fadeUp 1s ease .3s both;
-  font-weight:500;
-}
-.hero-badge .dot{
-  width:6px;height:6px;border-radius:50%;background:var(--orange);
-  box-shadow:0 0 8px var(--orange);
+.status-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 12px var(--orange);
 }
 .hero h1{
-  font-size:clamp(1.6rem,3.8vw,3rem);
-  font-weight:800;line-height:1.35;letter-spacing:-.5px;
-  margin-bottom:22px;animation:fadeUp 1s ease .5s both;
+  font-size:clamp(2.5rem,6vw,5.4rem);
+  line-height:1.15;
+  letter-spacing:-2px;
+  font-weight:900;
+  margin-bottom:24px;
 }
-.hero h1 .gradient{
-  background:linear-gradient(135deg,var(--orange),var(--orange-2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+.gradient{
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  -webkit-background-clip:text;
   background-clip:text;
+  color:transparent;
 }
-.typing-wrap{
-  font-size:clamp(.9rem,1.8vw,1.1rem);color:var(--text-dim);
-  margin-bottom:38px;min-height:1.7em;
-  animation:fadeUp 1s ease .7s both;
+.hero-desc{
+  max-width:600px;
+  color:var(--muted);
+  font-size:1rem;
   font-weight:300;
+  margin-bottom:34px;
 }
-.typing-cursor{
-  display:inline-block;width:1.5px;height:1.1em;background:var(--orange);
-  margin-inline-start:4px;vertical-align:middle;
-  animation:blink 1s infinite;
-}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-.hero-buttons{
-  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
-  animation:fadeUp 1s ease .9s both;
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 23px;
+  border-radius:50px;
+  font-size:.84rem;
+  font-weight:700;
+  transition:.35s var(--ease);
 }
 .btn-primary{
-  padding:13px 32px;border-radius:50px;
-  background:var(--orange);color:#fff;font-weight:600;font-size:.88rem;
-  transition:var(--transition);
-  display:inline-block;border:1px solid var(--orange);
-  box-shadow:0 8px 24px rgba(255,107,0,.25);
+  color:#fff;
+  background:var(--orange);
+  box-shadow:0 12px 35px rgba(255,107,0,.22);
 }
-.btn-primary:hover{
-  background:var(--orange-3);border-color:var(--orange-3);
-  transform:translateY(-2px);
-  box-shadow:0 12px 32px rgba(255,107,0,.4);
-}
-.btn-secondary{
-  padding:13px 32px;border-radius:50px;
-  background:transparent;border:1px solid var(--card-border);
-  color:var(--text);font-weight:500;font-size:.88rem;
-  transition:var(--transition);
-  display:inline-block;
-}
-.btn-secondary:hover{
-  border-color:rgba(255,107,0,.4);color:var(--orange);
-  transform:translateY(-2px);
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.btn-primary:hover{transform:translateY(-3px);background:var(--orange3);box-shadow:0 18px 42px rgba(255,107,0,.32)}
+.btn-ghost{border:1px solid var(--line);background:var(--glass);color:var(--text)}
+.btn-ghost:hover{transform:translateY(-3px);border-color:rgba(255,107,0,.35);color:var(--orange)}
 
-/* ==================== SCROLL HINT (MOUSE) ==================== */
-.scroll-hint{
-  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:var(--text-mute);font-size:.72rem;font-weight:400;
-  animation:fadeUp 1s ease 1.1s both, floatY 3s ease-in-out infinite 2s;
-  pointer-events:none;
-}
-.scroll-hint .mouse{
-  width:22px;height:34px;border:1.5px solid rgba(255,107,0,.5);border-radius:12px;
+.hero-visual{display:flex;justify-content:center}
+.logo-stage{
+  width:min(390px,80vw);
+  aspect-ratio:1;
+  border:1px solid var(--line);
+  border-radius:38px;
+  background:
+    radial-gradient(circle at center,rgba(255,107,0,.13),transparent 48%),
+    var(--glass);
+  box-shadow:var(--shadow);
+  display:grid;place-items:center;
   position:relative;
+  transform:rotate(2deg);
 }
-.scroll-hint .mouse::after{
-  content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);
-  width:2.5px;height:7px;background:var(--orange);border-radius:2px;
-  animation:scrollDot 1.6s infinite;
+.logo-stage:before,.logo-stage:after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(255,107,0,.16);
+  border-radius:50%;
 }
-@keyframes scrollDot{0%{top:7px;opacity:1;}100%{top:20px;opacity:0;}}
-@keyframes floatY{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+.logo-stage:before{inset:12%;animation:spin 18s linear infinite}
+.logo-stage:after{inset:22%;animation:spin 12s linear infinite reverse}
+.logo-stage img{
+  width:58%;
+  max-width:220px;
+  filter:drop-shadow(0 0 35px rgba(255,107,0,.48));
+  z-index:2;
+  animation:float 4s ease-in-out infinite;
+}
+.floating-chip{
+  position:absolute;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  background:var(--bg2);
+  border-radius:12px;
+  font-size:.68rem;
+  color:var(--muted);
+  box-shadow:var(--shadow);
+}
+.chip1{top:13%;right:-9%}.chip2{bottom:16%;left:-10%}
+@keyframes float{50%{transform:translateY(-9px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* ==================== STATS ==================== */
-.stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:18px;max-width:860px;margin:0 auto;padding:20px 5% 80px;
-  position:relative;z-index:2;
+.trust-strip{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:var(--glass);
 }
-.stat{
-  text-align:center;padding:30px 18px;
-  background:var(--glass);border:1px solid var(--card-border);
-  border-radius:16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  transition:var(--transition);
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
 }
-.stat:hover{
-  transform:translateY(-4px);
-  border-color:rgba(255,107,0,.25);
+.trust-item{
+  padding:27px 18px;
+  text-align:center;
+  border-inline-start:1px solid var(--line);
 }
-.stat-num{
-  font-size:1.5rem;font-weight:800;
-  color:var(--text);line-height:1;
-  margin-bottom:10px;
-}
-.stat-num.orange{
-  background:linear-gradient(135deg,var(--orange),var(--orange-2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.stat-label{color:var(--text-dim);font-size:.8rem;font-weight:400;}
+.trust-item:first-child{border:0}
+.trust-num{font-size:1.35rem;font-weight:900}
+.trust-label{color:var(--muted);font-size:.72rem}
 
-/* ==================== SECTIONS ==================== */
-section{padding:90px 5%;position:relative;z-index:2;}
-.section-head{text-align:center;margin-bottom:65px;}
-.section-tag{
-  display:inline-block;padding:5px 15px;border-radius:50px;
-  background:var(--glass);border:1px solid var(--card-border);
-  color:var(--text-dim);font-size:.72rem;font-weight:500;
-  margin-bottom:18px;letter-spacing:.5px;
+.section-head{max-width:700px;margin-bottom:55px}
+.section-head.center{text-align:center;margin-inline:auto}
+.kicker{
+  display:inline-block;
+  color:var(--orange);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:13px;
 }
 .section-head h2{
-  font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:800;
-  letter-spacing:-.5px;margin-bottom:14px;line-height:1.3;
+  font-size:clamp(1.8rem,4vw,3rem);
+  line-height:1.3;
+  font-weight:900;
+  letter-spacing:-1px;
+  margin-bottom:15px;
 }
-.section-head h2 .gradient{
-  background:linear-gradient(135deg,var(--orange),var(--orange-2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.section-head p{
-  color:var(--text-dim);max-width:540px;margin:0 auto;
-  font-size:.9rem;font-weight:300;
-}
+.section-head p{color:var(--muted);font-size:.9rem;font-weight:300}
 
-/* ==================== SERVICES ==================== */
-.services-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-  gap:18px;max-width:1180px;margin:0 auto;
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
 }
-.service-card{
-  position:relative;padding:34px 28px;border-radius:16px;
-  background:var(--glass);border:1px solid var(--card-border);
-  backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
-  overflow:hidden;transition:var(--transition);
+.card{
+  border:1px solid var(--line);
+  background:var(--glass);
+  border-radius:20px;
+  padding:29px;
+  transition:.4s var(--ease);
+  position:relative;
+  overflow:hidden;
 }
-.service-card:hover{
-  border-color:rgba(255,107,0,.3);
-  background:var(--glass-2);
-  transform:translateY(-4px);
+.card:before{
+  content:"";
+  position:absolute;
+  width:170px;height:170px;
+  background:radial-gradient(circle,rgba(255,107,0,.1),transparent 70%);
+  top:-80px;left:-80px;
+  opacity:0;transition:.4s;
 }
+.card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(255,107,0,.28);
+  background:var(--glass2);
+  box-shadow:var(--shadow);
+}
+.card:hover:before{opacity:1}
 .service-icon{
-  width:48px;height:48px;border-radius:13px;
-  background:rgba(255,107,0,.08);
-  border:1px solid rgba(255,107,0,.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;margin-bottom:20px;
-  transition:var(--transition);
+  width:50px;height:50px;
+  display:grid;place-items:center;
+  border-radius:15px;
+  background:rgba(255,107,0,.09);
+  border:1px solid rgba(255,107,0,.14);
+  font-size:1.35rem;
+  margin-bottom:20px;
+  transition:.35s;
 }
-.service-card:hover .service-icon{
-  background:var(--orange);
-  border-color:var(--orange);
-  transform:scale(1.05);
-}
-.service-card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px;}
-.service-card p{color:var(--text-dim);font-size:.85rem;margin-bottom:18px;font-weight:300;line-height:1.75;}
-.service-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.card:hover .service-icon{background:var(--orange);transform:scale(1.06) rotate(-3deg)}
+.card h3{font-size:1rem;margin-bottom:9px}
+.card p{font-size:.81rem;color:var(--muted);font-weight:300}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:19px}
 .tag{
-  font-size:.68rem;padding:4px 10px;border-radius:50px;
-  background:transparent;border:1px solid var(--card-border);
-  color:var(--text-mute);font-weight:500;
+  padding:4px 9px;border-radius:50px;
+  border:1px solid var(--line);
+  color:var(--muted2);font-size:.62rem;
 }
 
-/* ==================== PROCESS ==================== */
-.process{max-width:760px;margin:0 auto;}
+.process{
+  max-width:850px;
+  margin:auto;
+}
 .step{
-  display:flex;gap:26px;align-items:flex-start;
-  padding:26px 0;border-bottom:1px solid var(--card-border);
-  transition:var(--transition);
+  display:grid;
+  grid-template-columns:65px 1fr;
+  gap:25px;
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
 }
-.step:last-child{border-bottom:none;}
-.step:hover .step-num{color:var(--orange);border-color:var(--orange);}
-.step-num{
-  flex-shrink:0;width:46px;height:46px;border-radius:50%;
-  border:1px solid var(--card-border);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;
-  color:var(--text-mute);
-  transition:var(--transition);
+.step:last-child{border-bottom:0}
+.step-no{
+  width:52px;height:52px;
+  display:grid;place-items:center;
+  border:1px solid var(--line);
+  border-radius:50%;
+  font-family:'Montserrat';
+  color:var(--muted2);
+  font-weight:800;
+  transition:.3s;
 }
-.step-content{flex:1;padding-top:4px;}
-.step-content h3{font-size:1rem;font-weight:700;margin-bottom:6px;}
-.step-content p{color:var(--text-dim);font-size:.85rem;font-weight:300;}
+.step:hover .step-no{border-color:var(--orange);color:var(--orange)}
+.step h3{font-size:1rem;margin-bottom:6px}
+.step p{font-size:.82rem;color:var(--muted);font-weight:300}
 
-/* ==================== CTA BANNER ==================== */
-.cta-banner{
-  max-width:960px;margin:0 auto;padding:65px 36px;border-radius:22px;
-  background:var(--glass);border:1px solid var(--card-border);
-  text-align:center;position:relative;overflow:hidden;
-  backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
-.cta-banner::before{
-  content:'';position:absolute;top:-50%;right:-20%;width:380px;height:380px;
-  background:radial-gradient(circle,rgba(255,107,0,.12),transparent 70%);
-  animation:float 10s ease-in-out infinite;max-width:100%;
-  pointer-events:none;
+.member{
+  padding:27px 20px;
+  text-align:center;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--glass);
+  transition:.4s var(--ease);
 }
-@keyframes float{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,30px);}}
-.cta-banner h2{
-  font-size:clamp(1.3rem,2.8vw,2rem);font-weight:800;margin-bottom:12px;
-  position:relative;z-index:2;letter-spacing:-.5px;
+.member:hover{transform:translateY(-6px);border-color:rgba(255,107,0,.3);box-shadow:var(--shadow)}
+.avatar{
+  width:82px;height:82px;
+  border-radius:24px;
+  margin:0 auto 17px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(255,107,0,.18),rgba(255,61,0,.04));
+  border:1px solid rgba(255,107,0,.18);
+  font-size:1.7rem;
 }
-.cta-banner p{color:var(--text-dim);margin-bottom:26px;position:relative;z-index:2;font-weight:300;font-size:.9rem;}
-.cta-banner .btn-primary{position:relative;z-index:2;}
+.member h3{font-size:.92rem;margin-bottom:4px}
+.member .role{color:var(--orange);font-size:.7rem;font-weight:700;margin-bottom:8px}
+.member .age{color:var(--muted2);font-size:.68rem}
+.team-note{
+  max-width:760px;
+  margin:27px auto 0;
+  padding:13px 18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.72rem;
+  background:var(--glass);
+}
+.team-note strong{color:var(--orange)}
 
-/* ==================== CONTACT ==================== */
-.contact-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:14px;max-width:1080px;margin:0 auto;
+.team-more{
+  display:block;
+  width:max-content;
+  margin:27px auto 0;
 }
-.contact-card{
-  display:flex;flex-direction:column;align-items:center;gap:11px;
-  padding:28px 18px;border-radius:15px;text-align:center;
-  background:var(--glass);border:1px solid var(--card-border);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  transition:var(--transition);position:relative;
+
+.contact-wrap{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:22px;
+  align-items:stretch;
 }
-.contact-card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(255,107,0,.35);
-  background:var(--glass-2);
+.contact-intro,.contact-grid-card{
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:var(--glass);
+  padding:34px;
 }
+.contact-intro{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.contact-intro h2{font-size:2rem;line-height:1.3;margin-bottom:13px}
+.contact-intro p{color:var(--muted);font-size:.85rem}
+.contact-mark{
+  font-size:2.3rem;
+  margin-bottom:20px;
+}
+.contacts{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+}
+.contact{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  transition:.3s var(--ease);
+}
+.contact:hover{transform:translateY(-3px);border-color:rgba(255,107,0,.3);background:var(--glass2)}
 .contact-icon{
-  width:46px;height:46px;border-radius:13px;
+  width:40px;height:40px;
+  flex:0 0 40px;
+  display:grid;place-items:center;
+  border-radius:12px;
   background:rgba(255,107,0,.08);
-  border:1px solid rgba(255,107,0,.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.15rem;transition:var(--transition);
 }
-.contact-card:hover .contact-icon{
-  background:var(--orange);border-color:var(--orange);
-  transform:scale(1.05);
-}
-.contact-card .label{font-size:.75rem;color:var(--text-mute);font-weight:400;}
-.contact-card .value{
-  font-weight:600;font-size:.83rem;direction:ltr;
-  word-break:break-all;color:var(--text);
-  line-height:1.55;
-}
+.contact small{display:block;color:var(--muted2);font-size:.61rem}
+.contact b{font-size:.75rem;word-break:break-word}
+.contact b.ltr{direction:ltr;display:block}
 
-/* ==================== FOOTER ==================== */
+.cta{
+  max-width:960px;
+  margin:auto;
+  text-align:center;
+  padding:65px 30px;
+  border:1px solid rgba(255,107,0,.18);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(255,107,0,.12),transparent 45%),
+    var(--glass);
+}
+.cta h2{font-size:clamp(1.5rem,3vw,2.3rem);margin-bottom:10px}
+.cta p{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+
 footer{
-  padding:45px 5% 28px;text-align:center;
-  border-top:1px solid var(--card-border);
+  padding:55px 0 30px;
+  border-top:1px solid var(--line);
+  text-align:center;
   position:relative;z-index:2;
 }
-.footer-logo{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:'Montserrat',sans-serif;font-weight:900;
-  font-size:1.05rem;letter-spacing:3px;margin-bottom:20px;
-  transition:var(--transition);
+.footer-brand{font-family:'Montserrat';font-weight:900;letter-spacing:3px;font-size:1.05rem}
+.footer-links{display:flex;justify-content:center;gap:22px;margin:20px 0;flex-wrap:wrap}
+.footer-links a{color:var(--muted);font-size:.73rem}
+.footer-links a:hover{color:var(--orange)}
+.copy{color:var(--muted2);font-size:.67rem}
+
+.reveal{opacity:0;transform:translateY(28px);transition:.8s var(--ease)}
+.reveal.show{opacity:1;transform:none}
+
+@media(max-width:950px){
+  .hero-layout{grid-template-columns:1fr;text-align:center}
+  .hero-copy{margin:auto}
+  .hero-desc{margin-inline:auto}
+  .hero-actions{justify-content:center}
+  .hero-visual{order:-1}
+  .logo-stage{width:290px}
+  .services{grid-template-columns:repeat(2,1fr)}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-wrap{grid-template-columns:1fr}
 }
-.footer-logo .logo-circle{
-  width:28px;height:28px;border-radius:50%;
-  background:linear-gradient(135deg,var(--orange),var(--orange-3));
-  position:relative;overflow:hidden;flex-shrink:0;
-  box-shadow:0 0 18px rgba(255,107,0,.5);
+@media(max-width:700px){
+  .nav-links,.nav-cta{display:none}
+  .nav-inner{justify-content:space-between}
+  section{padding:75px 0}
+  .hero{padding-top:120px}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .trust-item:nth-child(3){border-inline-start:0;border-top:1px solid var(--line)}
+  .trust-item:nth-child(4){border-top:1px solid var(--line)}
+  .services{grid-template-columns:1fr}
+  .contacts{grid-template-columns:1fr}
+  .step{grid-template-columns:48px 1fr;gap:14px}
+  .step-no{width:44px;height:44px}
 }
-.footer-logo .logo-circle::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:55%;
-  background:var(--bg);
-  clip-path:polygon(0 100%,0 60%,20% 30%,35% 50%,55% 15%,75% 45%,100% 25%,100% 100%);
-  transition:background .5s;
-}
-.footer-socials{
-  display:flex;justify-content:center;gap:10px;margin:20px 0;
-  flex-wrap:wrap;
-}
-.social-btn{
-  width:38px;height:38px;border-radius:11px;
-  background:var(--glass);border:1px solid var(--card-border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.95rem;transition:var(--transition);color:var(--text-dim);
-}
-.social-btn:hover{
-  border-color:rgba(255,107,0,.4);color:var(--orange);
-  transform:translateY(-3px);
-}
-.footer-copy{
-  color:var(--text-mute);font-size:.78rem;margin-top:22px;
-  font-weight:300;letter-spacing:.3px;
+@media(max-width:460px){
+  .team-grid{grid-template-columns:1fr}
+  .hero h1{letter-spacing:-1px}
+  .contact-intro,.contact-grid-card{padding:24px}
 }
 
-/* ==================== REVEAL ==================== */
-.reveal{opacity:0;transform:translateY(40px);transition:all .9s cubic-bezier(.16,1,.3,1);}
-.reveal.active{opacity:1;transform:translateY(0);}
-
-/* ==================== MOBILE ==================== */
-@media(max-width:768px){
-  section{padding:65px 5%;}
-  .hero{padding:110px 5% 90px;}
-  .hero-logo-img{width:140px;height:140px;}
-  .hero-buttons{flex-direction:column;width:100%;}
-  .btn-primary,.btn-secondary{width:100%;text-align:center;}
-  .contact-grid{grid-template-columns:1fr 1fr;}
-  .services-grid{grid-template-columns:1fr;}
-  .step{gap:16px;}
-  .cta-banner{padding:45px 22px;}
-  nav{padding:14px 5%;}
-  nav.scrolled{padding:10px 5%;}
-}
-@media(max-width:480px){
-  .contact-grid{grid-template-columns:1fr;}
-  .nav-cta{display:none;}
+/* RTL/LTR helper */
+[dir="ltr"] .hero-copy{text-align:left}
+[dir="rtl"] .hero-copy{text-align:right}
+@media(max-width:950px){
+  [dir="ltr"] .hero-copy,[dir="rtl"] .hero-copy{text-align:center}
 }
 </style>
 </head>
+
 <body>
-
-<!-- BACKGROUND -->
 <canvas id="particles"></canvas>
-<div class="bg-ambient"></div>
+<div class="ambient"></div>
+<div class="grid-bg"></div>
 
-<!-- NAVBAR -->
-<nav id="nav">
-  <ul class="nav-links">
-    <li><a href="#services" data-i18n="nav_services">خدمات</a></li>
-    <li><a href="#process" data-i18n="nav_process">فرآیند کار</a></li>
-    <li><a href="#contact" data-i18n="nav_contact">تماس</a></li>
-  </ul>
-  <div class="nav-controls">
-    <button class="ctrl-btn" id="themeBtn" title="Theme">🌙</button>
-    <button class="ctrl-btn" id="langBtn" title="Language"><span class="lang-text">EN</span></button>
-    <a href="#contact" class="nav-cta" data-i18n="nav_cta">شروع پروژه</a>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-mark"></span>
+      <span>WEBAK</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#services" data-i18n="nav_services">خدمات</a></li>
+      <li><a href="#process" data-i18n="nav_process">فرآیند</a></li>
+      <li><a href="#team" data-i18n="nav_team">تیم ما</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">ارتباط</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="theme">☾</button>
+      <button class="icon-btn" id="langBtn" aria-label="language">EN</button>
+      <a class="nav-cta" href="#contact" data-i18n="nav_cta">شروع پروژه</a>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<header class="hero">
-  <!-- BIG LOGO (IMAGE) -->
-  <div class="hero-logo">
-    <img src="https://uploadkon.ir/uploads/0c4102_264ca002-26Untitled-removebg-preview.png" alt="WEBAK" class="hero-logo-img">
-  </div>
+<header class="hero" id="home">
+  <div class="container hero-layout">
+    <div class="hero-copy reveal">
+      <div class="eyebrow">
+        <span class="status-dot"></span>
+        <span data-i18n="hero_badge">یک تیم کوچک، با ایده‌های بزرگ</span>
+      </div>
 
-  <div class="hero-badge">
-    <span class="dot"></span>
-    <span data-i18n="hero_badge">آماده‌ی همکاری در پروژه‌های جدید</span>
-  </div>
-  <h1>
-    <span data-i18n="hero_title_1">ایده‌ات رو</span> <span class="gradient" data-i18n="hero_title_2">واقعی</span> <span data-i18n="hero_title_3">می‌کنیم</span>
-  </h1>
-  <div class="typing-wrap">
-    <span id="typing"></span><span class="typing-cursor"></span>
-  </div>
-  <div class="hero-buttons">
-    <a href="#contact" class="btn-primary" data-i18n="hero_btn_1">شروع پروژه</a>
-    <a href="https://splus.ir/RAMtinHB" target="_blank" class="btn-secondary" data-i18n="hero_btn_2">گفتگو در سروش</a>
-  </div>
+      <h1>
+        <span data-i18n="hero_1">ایده‌ات را</span>
+        <span class="gradient" data-i18n="hero_2"> دیجیتال</span>
+        <span data-i18n="hero_3"> می‌کنیم.</span>
+      </h1>
 
-  <!-- MOUSE SCROLL HINT -->
-  <div class="scroll-hint">
-    <div class="mouse"></div>
-    <span data-i18n="scroll_hint">اسکرول کن</span>
+      <p class="hero-desc" data-i18n="hero_desc">
+        WEBAK یک تیم نوجوان و خلاق برای ساخت سایت، اپلیکیشن، بات و تجربه‌های دیجیتال است؛
+        جایی که ایده فقط روی کاغذ نمی‌ماند.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact" data-i18n="hero_btn1">شروع یک پروژه ↗</a>
+        <a class="btn btn-ghost" href="#team" data-i18n="hero_btn2">آشنایی با تیم</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="logo-stage">
+        <span class="floating-chip chip1">⚡ Digital Studio</span>
+        <img src="https://uploadkon.ir/uploads/0c4102_264ca002-26Untitled-removebg-preview.png" alt="WEBAK">
+        <span class="floating-chip chip2">🚀 Build • Create • Ship</span>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- STATS -->
-<section class="stats reveal" style="padding-top:0;">
-  <div class="stat">
-    <div class="stat-num orange" data-i18n="stat_1_num">۲۴/۷</div>
-    <div class="stat-label" data-i18n="stat_1">پشتیبانی شبانه‌روزی</div>
+<div class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item"><div class="trust-num">01</div><div class="trust-label" data-i18n="trust1">ایده تا اجرا</div></div>
+    <div class="trust-item"><div class="trust-num">⚡</div><div class="trust-label" data-i18n="trust2">تمرکز روی سرعت</div></div>
+    <div class="trust-item"><div class="trust-num">✦</div><div class="trust-label" data-i18n="trust3">طراحی اختصاصی</div></div>
+    <div class="trust-item"><div class="trust-num">∞</div><div class="trust-label" data-i18n="trust4">یادگیری و رشد</div></div>
   </div>
-  <div class="stat">
-    <div class="stat-num">⚡</div>
-    <div class="stat-label" data-i18n="stat_2">تحویل سریع پروژه</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">💎</div>
-    <div class="stat-label" data-i18n="stat_3">کیفیت تضمینی</div>
-  </div>
-</section>
+</div>
 
-<!-- SERVICES -->
+<main>
 <section id="services">
-  <div class="section-head reveal">
-    <div class="section-tag" data-i18n="services_tag">خدمات ما</div>
-    <h2><span data-i18n="services_title_1">هر چیزی که</span> <span class="gradient" data-i18n="services_title_2">نیاز داری</span></h2>
-    <p data-i18n="services_desc">از ساخت سایت و اپ تا ترجمه و بات، همه رو با کیفیت بالا تحویل می‌دیم.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-icon">💻</div>
-      <h3 data-i18n="srv1_title">ساخت وب‌سایت</h3>
-      <p data-i18n="srv1_desc">طراحی سایت‌های مدرن، ریسپانسیو و سریع با بهترین تکنولوژی‌های روز.</p>
-      <div class="service-tags">
-        <span class="tag">React</span><span class="tag">WordPress</span><span class="tag">Next.js</span>
-      </div>
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="kicker" data-i18n="services_kicker">WHAT WE DO</span>
+      <h2><span data-i18n="services_title1">چیزهایی می‌سازیم که</span> <span class="gradient" data-i18n="services_title2">دیده می‌شوند.</span></h2>
+      <p data-i18n="services_desc">از اولین طرح تا نسخه نهایی، روی ظاهر، تجربه کاربری و عملکرد تمرکز می‌کنیم.</p>
     </div>
-    <div class="service-card reveal">
-      <div class="service-icon">📱</div>
-      <h3 data-i18n="srv2_title">ساخت اپلیکیشن</h3>
-      <p data-i18n="srv2_desc">اپ‌های موبایل برای اندروید و iOS با طراحی اختصاصی و کارایی بالا.</p>
-      <div class="service-tags">
-        <span class="tag">Flutter</span><span class="tag">React Native</span>
-      </div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🤖</div>
-      <h3 data-i18n="srv3_title">ساخت بات</h3>
-      <p data-i18n="srv3_desc">بات‌های تلگرام، سروش و واتس‌اپ برای اتوماسیون. بات سروش ما: <strong style="color:var(--orange);font-weight:600;">@webakbot</strong></p>
-      <div class="service-tags">
-        <span class="tag">Telegram</span><span class="tag">Soroush</span><span class="tag">AI</span>
-      </div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🌐</div>
-      <h3 data-i18n="srv4_title">ترجمه تخصصی</h3>
-      <p data-i18n="srv4_desc">ترجمه متون انگلیسی به فارسی و برعکس، با دقت بالا و لحن طبیعی.</p>
-      <div class="service-tags">
-        <span class="tag">English</span><span class="tag">فارسی</span>
-      </div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">☁️</div>
-      <h3 data-i18n="srv5_title">هاست و دامنه</h3>
-      <p data-i18n="srv5_desc">خرید هاست پرسرعت و دامنه با بهترین قیمت و پشتیبانی کامل.</p>
-      <div class="service-tags">
-        <span class="tag">Hosting</span><span class="tag">Domain</span><span class="tag">SSL</span>
-      </div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">⚡</div>
-      <h3 data-i18n="srv6_title">بهینه‌سازی سایت</h3>
-      <p data-i18n="srv6_desc">افزایش سرعت، بهبود سئو و رفع مشکلات فنی سایت شما.</p>
-      <div class="service-tags">
-        <span class="tag">SEO</span><span class="tag">Speed</span>
-      </div>
+
+    <div class="services">
+      <article class="card reveal">
+        <div class="service-icon">💻</div>
+        <h3 data-i18n="s1t">وب‌سایت‌های مدرن</h3>
+        <p data-i18n="s1d">سایت‌های سریع، ریسپانسیو و حرفه‌ای که برای برند شما طراحی می‌شوند، نه برای یک قالب تکراری.</p>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">JS</span><span class="tag">React</span><span class="tag">Next.js</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="service-icon">📱</div>
+        <h3 data-i18n="s2t">اپلیکیشن</h3>
+        <p data-i18n="s2d">ایده موبایلی شما را به محصولی کاربردی با رابط کاربری تمیز و تجربه‌ای روان تبدیل می‌کنیم.</p>
+        <div class="tags"><span class="tag">Flutter</span><span class="tag">React Native</span><span class="tag">UI/UX</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="service-icon">🤖</div>
+        <h3 data-i18n="s3t">بات و اتوماسیون</h3>
+        <p data-i18n="s3d">بات‌های کاربردی برای سرویس‌های مختلف، از پاسخ‌گویی و مدیریت تا اتوماسیون کارهای تکراری.</p>
+        <div class="tags"><span class="tag">Soroush</span><span class="tag">Telegram</span><span class="tag">AI</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="service-icon">🎨</div>
+        <h3 data-i18n="s4t">طراحی و هویت دیجیتال</h3>
+        <p data-i18n="s4d">از ترکیب رنگ و تایپوگرافی تا ساخت یک رابط کاربری منسجم، ظاهر محصول را به بخشی از هویت آن تبدیل می‌کنیم.</p>
+        <div class="tags"><span class="tag">UI</span><span class="tag">UX</span><span class="tag">Brand</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="service-icon">🌐</div>
+        <h3 data-i18n="s5t">ترجمه و محتوای دیجیتال</h3>
+        <p data-i18n="s5d">ترجمه و آماده‌سازی محتوای فارسی و انگلیسی با تمرکز روی خوانایی و لحن طبیعی.</p>
+        <div class="tags"><span class="tag">English</span><span class="tag">فارسی</span><span class="tag">Content</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="service-icon">⚙️</div>
+        <h3 data-i18n="s6t">بهینه‌سازی و توسعه</h3>
+        <p data-i18n="s6d">رفع مشکلات فنی، بهبود سرعت، مرتب‌سازی ساختار و آماده‌سازی پروژه برای رشد آینده.</p>
+        <div class="tags"><span class="tag">Speed</span><span class="tag">SEO</span><span class="tag">Performance</span></div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section id="process">
-  <div class="section-head reveal">
-    <div class="section-tag" data-i18n="process_tag">فرآیند کار</div>
-    <h2><span data-i18n="process_title_1">چطور</span> <span class="gradient" data-i18n="process_title_2">کار می‌کنیم</span></h2>
-    <p data-i18n="process_desc">یک مسیر شفاف و حرفه‌ای از ایده تا تحویل نهایی.</p>
-  </div>
-  <div class="process">
-    <div class="step reveal">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <h3 data-i18n="step1_title">مشاوره و دریافت ایده</h3>
-        <p data-i18n="step1_desc">با ما تماس می‌گیری، ایده‌ات رو مطرح می‌کنی و ما بهترین راه‌حل رو پیشنهاد می‌دیم.</p>
-      </div>
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="kicker" data-i18n="process_kicker">HOW IT WORKS</span>
+      <h2><span data-i18n="process_title1">از ایده تا</span> <span class="gradient" data-i18n="process_title2">ساختن.</span></h2>
+      <p data-i18n="process_desc">فرآیند ما ساده است؛ ارتباط شفاف، طراحی فکرشده و اجرای مرحله‌به‌مرحله.</p>
     </div>
-    <div class="step reveal">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <h3 data-i18n="step2_title">طراحی و برنامه‌ریزی</h3>
-        <p data-i18n="step2_desc">نقشه راه پروژه رو طراحی می‌کنیم و زمان‌بندی دقیق تحویل رو مشخص می‌کنیم.</p>
-      </div>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <h3 data-i18n="step3_title">اجرا و توسعه</h3>
-        <p data-i18n="step3_desc">پروژه با بهترین تکنولوژی‌ها پیاده‌سازی می‌شه و در هر مرحله گزارش می‌دیم.</p>
-      </div>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <h3 data-i18n="step4_title">تحویل و پشتیبانی</h3>
-        <p data-i18n="step4_desc">پروژه نهایی تحویل داده می‌شه و تا مدت مشخصی پشتیبانی رایگان ارائه می‌دیم.</p>
-      </div>
+
+    <div class="process">
+      <div class="step reveal"><div class="step-no">01</div><div><h3 data-i18n="p1t">کشف ایده</h3><p data-i18n="p1d">نیاز، هدف و مخاطب پروژه را مشخص می‌کنیم تا قبل از ساختن، بدانیم دقیقاً چه چیزی باید ساخته شود.</p></div></div>
+      <div class="step reveal"><div class="step-no">02</div><div><h3 data-i18n="p2t">طراحی مسیر</h3><p data-i18n="p2d">ساختار، تجربه کاربری و مسیر اجرای پروژه را مشخص می‌کنیم و کار را به مراحل قابل مدیریت تقسیم می‌کنیم.</p></div></div>
+      <div class="step reveal"><div class="step-no">03</div><div><h3 data-i18n="p3t">ساخت و تست</h3><p data-i18n="p3d">توسعه انجام می‌شود، بخش‌ها تست می‌شوند و در طول مسیر بازخوردها را وارد محصول می‌کنیم.</p></div></div>
+      <div class="step reveal"><div class="step-no">04</div><div><h3 data-i18n="p4t">تحویل و رشد</h3><p data-i18n="p4d">نسخه نهایی تحویل می‌شود و ساختار پروژه طوری آماده می‌شود که بتواند در آینده توسعه پیدا کند.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<section style="padding-top:20px;">
-  <div class="cta-banner reveal">
-    <h2 data-i18n="cta_title">آماده‌ای پروژه‌ات رو شروع کنی؟</h2>
-    <p data-i18n="cta_desc">همین حالا با ما تماس بگیر و ایده‌ات رو به واقعیت تبدیل کن.</p>
-    <a href="#contact" class="btn-primary" data-i18n="cta_btn">شروع گفتگو</a>
+<section id="team">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="kicker" data-i18n="team_kicker">THE TEAM</span>
+      <h2><span data-i18n="team_title1">پشت WEBAK،</span> <span class="gradient" data-i18n="team_title2">ما هستیم.</span></h2>
+      <p data-i18n="team_desc">یک تیم جوان که از یادگیری، ساختن و امتحان کردن ایده‌های جدید انرژی می‌گیرد.</p>
+    </div>
+
+    <div class="team-grid">
+      <article class="member reveal">
+        <div class="avatar">👨🏻‍💻</div>
+        <h3>رامتین حسین بیکی</h3>
+        <div class="role" data-i18n="founder">بنیان‌گذار WEBAK</div>
+        <div class="age">14 <span data-i18n="years">ساله</span></div>
+      </article>
+      <article class="member reveal">
+        <div class="avatar">🧑🏻‍💻</div>
+        <h3>آرشام کریمی گزافرودی</h3>
+        <div class="role" data-i18n="engineer">مهندس / توسعه‌دهنده</div>
+        <div class="age">14 <span data-i18n="years2">ساله</span></div>
+      </article>
+      <article class="member reveal">
+        <div class="avatar">👨🏻‍💻</div>
+        <h3>امیر علی پیشرایی</h3>
+        <div class="role" data-i18n="engineer2">مهندس / عضو تیم</div>
+        <div class="age">13 <span data-i18n="years3">ساله</span></div>
+      </article>
+      <article class="member reveal">
+        <div class="avatar">🧑🏻‍💻</div>
+        <h3>هیوا عصری</h3>
+        <div class="role" data-i18n="engineer3">مهندس / عضو تیم</div>
+        <div class="age">14 <span data-i18n="years4">ساله</span></div>
+      </article>
+    </div>
+
+    <div class="team-note reveal">
+      <span data-i18n="team_note">بله، اعضای تیم ما هنوز نوجوان هستند؛ اما</span>
+      <strong data-i18n="team_note_strong">یادگیری، ساختن و تجربه کردن را از همین حالا جدی گرفته‌ایم.</strong>
+    </div>
+
+    <!-- این لینک را بعداً می‌توانی به فایل معرفی کامل تیم وصل کنی -->
+    <a class="btn btn-ghost team-more reveal" href="team.html" data-i18n="team_more">معرفی کامل مهندسین ↗</a>
   </div>
 </section>
 
-<!-- CONTACT -->
+<section>
+  <div class="container">
+    <div class="cta reveal">
+      <div style="font-size:2rem;margin-bottom:12px">🚀</div>
+      <h2 data-i18n="cta_title">یک ایده داری؟ بیایید بسازیمش.</h2>
+      <p data-i18n="cta_desc">پروژه‌های خوب از یک گفت‌وگوی ساده شروع می‌شوند.</p>
+      <a href="#contact" class="btn btn-primary" data-i18n="cta_btn">شروع گفتگو ↗</a>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
-  <div class="section-head reveal">
-    <div class="section-tag" data-i18n="contact_tag">تماس با ما</div>
-    <h2><span data-i18n="contact_title_1">بیا</span> <span class="gradient" data-i18n="contact_title_2">در ارتباط</span> <span data-i18n="contact_title_3">باشیم</span></h2>
-    <p data-i18n="contact_desc">از هر راهی که راحت‌تری با ما تماس بگیر.</p>
-  </div>
-  <div class="contact-grid">
-    <a href="https://splus.ir/RAMtinHB" target="_blank" class="contact-card reveal">
-      <div class="contact-icon">📱</div>
-      <div class="label" data-i18n="c_soroush">سروش</div>
-      <div class="value">@RAMtinHB</div>
-    </a>
-    <a href="https://splus.ir/webakbot" target="_blank" class="contact-card reveal">
-      <div class="contact-icon">🤖</div>
-      <div class="label" data-i18n="c_bot">بات سروش</div>
-      <div class="value">@webakbot</div>
-    </a>
-    <a href="https://splus.ir/WEBAK" target="_blank" class="contact-card reveal">
-      <div class="contact-icon">📢</div>
-      <div class="label" data-i18n="c_channel">کانال رسمی</div>
-      <div class="value">splus.ir/WEBAK</div>
-    </a>
-    <a href="https://github.com/ramtinhossinbiki-afk" target="_blank" class="contact-card reveal">
-      <div class="contact-icon">💻</div>
-      <div class="label" data-i18n="c_github">گیت‌هاب</div>
-      <div class="value">ramtinhossinbiki-afk</div>
-    </a>
-    <a href="tel:09300545003" class="contact-card reveal">
-      <div class="contact-icon">📞</div>
-      <div class="label" data-i18n="c_phone">شماره تماس</div>
-      <div class="value">09300545003</div>
-    </a>
-    <a href="mailto:ramtinbiki@gmail.com,ramtinhossinbiki@gmail.com" class="contact-card reveal">
-      <div class="contact-icon">✉️</div>
-      <div class="label" data-i18n="c_email">ایمیل</div>
-      <div class="value">ramtinbiki@gmail.com<br>ramtinhossinbiki@gmail.com</div>
-    </a>
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="kicker" data-i18n="contact_kicker">CONTACT</span>
+      <h2><span data-i18n="contact_title1">بیا در</span> <span class="gradient" data-i18n="contact_title2">ارتباط باشیم.</span></h2>
+      <p data-i18n="contact_desc">از هر راهی که راحت‌تری با ما تماس بگیر.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-intro reveal">
+        <div class="contact-mark">✦</div>
+        <h2 data-i18n="contact_big">حرفی برای ساختن داری؟</h2>
+        <p data-i18n="contact_big_desc">ایده‌ات را بگو؛ از یک سایت کوچک تا یک پروژه کامل، اول درباره چیزی که می‌خواهی صحبت می‌کنیم.</p>
+      </div>
+
+      <div class="contact-grid-card reveal">
+        <div class="contacts">
+          <a class="contact" href="https://splus.ir/RAMtinHB" target="_blank" rel="noopener">
+            <div class="contact-icon">📱</div><div><small data-i18n="c1">سروش</small><b class="ltr">@RAMtinHB</b></div>
+          </a>
+          <a class="contact" href="https://splus.ir/webakbot" target="_blank" rel="noopener">
+            <div class="contact-icon">🤖</div><div><small data-i18n="c2">بات سروش</small><b class="ltr">@webakbot</b></div>
+          </a>
+          <a class="contact" href="https://splus.ir/WEBAK" target="_blank" rel="noopener">
+            <div class="contact-icon">📢</div><div><small data-i18n="c3">کانال رسمی</small><b class="ltr">splus.ir/WEBAK</b></div>
+          </a>
+          <a class="contact" href="https://github.com/ramtinhossinbiki-afk" target="_blank" rel="noopener">
+            <div class="contact-icon">💻</div><div><small data-i18n="c4">گیت‌هاب</small><b class="ltr">ramtinhossinbiki-afk</b></div>
+          </a>
+          <a class="contact" href="tel:09300545003">
+            <div class="contact-icon">📞</div><div><small data-i18n="c5">شماره تماس</small><b class="ltr">09300545003</b></div>
+          </a>
+          <a class="contact" href="mailto:ramtinbiki@gmail.com,ramtinhossinbiki@gmail.com">
+            <div class="contact-icon">✉️</div><div><small data-i18n="c6">ایمیل</small><b class="ltr">ramtinbiki@gmail.com</b></div>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+</main>
 
-<!-- FOOTER -->
 <footer>
-  <a href="https://your-website.com" class="footer-logo" target="_blank" rel="noopener">
-    <div class="logo-circle"></div>
-    <span>WEBAK</span>
-  </a>
-  <div class="footer-socials">
-    <a href="https://splus.ir/RAMtinHB" target="_blank" class="social-btn" title="Soroush">📱</a>
-    <a href="https://splus.ir/webakbot" target="_blank" class="social-btn" title="Bot">🤖</a>
-    <a href="https://splus.ir/WEBAK" target="_blank" class="social-btn" title="Channel">📢</a>
-    <a href="https://github.com/ramtinhossinbiki-afk" target="_blank" class="social-btn" title="GitHub">💻</a>
-    <a href="tel:09300545003" class="social-btn" title="Phone">📞</a>
-    <a href="mailto:ramtinbiki@gmail.com" class="social-btn" title="Email">✉️</a>
+  <div class="container">
+    <div class="footer-brand">WEBAK</div>
+    <div class="footer-links">
+      <a href="#services" data-i18n="f1">خدمات</a>
+      <a href="#team" data-i18n="f2">تیم</a>
+      <a href="#contact" data-i18n="f3">ارتباط</a>
+      <a href="https://github.com/ramtinhossinbiki-afk" target="_blank">GitHub</a>
+    </div>
+    <div class="copy" data-i18n="copy">© WEBAK — ساخته‌شده با ایده، کد و کمی دیوانگی 🚀</div>
   </div>
-  <div class="footer-copy" data-i18n="footer_copy">© کل حق مربوط به سازنده میباشد</div>
 </footer>
 
 <script>
-/* ==================== TRANSLATIONS ==================== */
-const translations = {
-  fa: {
-    nav_services:'خدمات',nav_process:'فرآیند کار',nav_contact:'تماس',
-    nav_cta:'شروع پروژه',
-    hero_badge:'آماده‌ی همکاری در پروژه‌های جدید',
-    hero_title_1:'ایده‌ات رو',hero_title_2:'واقعی',hero_title_3:'می‌کنیم',
-    hero_btn_1:'شروع پروژه',hero_btn_2:'گفتگو در سروش',
-    scroll_hint:'اسکرول کن',
-    stat_1_num:'۲۴/۷',stat_1:'پشتیبانی شبانه‌روزی',
-    stat_2:'تحویل سریع پروژه',stat_3:'کیفیت تضمینی',
-    services_tag:'خدمات ما',
-    services_title_1:'هر چیزی که',services_title_2:'نیاز داری',
-    services_desc:'از ساخت سایت و اپ تا ترجمه و بات، همه رو با کیفیت بالا تحویل می‌دیم.',
-    srv1_title:'ساخت وب‌سایت',srv1_desc:'طراحی سایت‌های مدرن، ریسپانسیو و سریع با بهترین تکنولوژی‌های روز.',
-    srv2_title:'ساخت اپلیکیشن',srv2_desc:'اپ‌های موبایل برای اندروید و iOS با طراحی اختصاصی و کارایی بالا.',
-    srv3_title:'ساخت بات',srv3_desc:'بات‌های تلگرام، سروش و واتس‌اپ برای اتوماسیون. بات سروش ما:',
-    srv4_title:'ترجمه تخصصی',srv4_desc:'ترجمه متون انگلیسی به فارسی و برعکس، با دقت بالا و لحن طبیعی.',
-    srv5_title:'هاست و دامنه',srv5_desc:'خرید هاست پرسرعت و دامنه با بهترین قیمت و پشتیبانی کامل.',
-    srv6_title:'بهینه‌سازی سایت',srv6_desc:'افزایش سرعت، بهبود سئو و رفع مشکلات فنی سایت شما.',
-    process_tag:'فرآیند کار',
-    process_title_1:'چطور',process_title_2:'کار می‌کنیم',
-    process_desc:'یک مسیر شفاف و حرفه‌ای از ایده تا تحویل نهایی.',
-    step1_title:'مشاوره و دریافت ایده',step1_desc:'با ما تماس می‌گیری، ایده‌ات رو مطرح می‌کنی و ما بهترین راه‌حل رو پیشنهاد می‌دیم.',
-    step2_title:'طراحی و برنامه‌ریزی',step2_desc:'نقشه راه پروژه رو طراحی می‌کنیم و زمان‌بندی دقیق تحویل رو مشخص می‌کنیم.',
-    step3_title:'اجرا و توسعه',step3_desc:'پروژه با بهترین تکنولوژی‌ها پیاده‌سازی می‌شه و در هر مرحله گزارش می‌دیم.',
-    step4_title:'تحویل و پشتیبانی',step4_desc:'پروژه نهایی تحویل داده می‌شه و تا مدت مشخصی پشتیبانی رایگان ارائه می‌دیم.',
-    cta_title:'آماده‌ای پروژه‌ات رو شروع کنی؟',
-    cta_desc:'همین حالا با ما تماس بگیر و ایده‌ات رو به واقعیت تبدیل کن.',
-    cta_btn:'شروع گفتگو',
-    contact_tag:'تماس با ما',
-    contact_title_1:'بیا',contact_title_2:'در ارتباط',contact_title_3:'باشیم',
-    contact_desc:'از هر راهی که راحت‌تری با ما تماس بگیر.',
-    c_soroush:'سروش',c_bot:'بات سروش',c_channel:'کانال رسمی',
-    c_github:'گیت‌هاب',c_phone:'شماره تماس',c_email:'ایمیل',
-    footer_copy:'© کل حق مربوط به سازنده میباشد'
-  },
-  en: {
-    nav_services:'Services',nav_process:'Process',nav_contact:'Contact',
-    nav_cta:'Start Project',
-    hero_badge:'Ready for new projects',
-    hero_title_1:'We make your',hero_title_2:'ideas',hero_title_3:'come true',
-    hero_btn_1:'Start Project',hero_btn_2:'Chat on Soroush',
-    scroll_hint:'Scroll',
-    stat_1_num:'24/7',stat_1:'Round-the-clock support',
-    stat_2:'Fast delivery',stat_3:'Guaranteed quality',
-    services_tag:'Our Services',
-    services_title_1:'Everything you',services_title_2:'need',
-    services_desc:'From websites and apps to translation and bots, all delivered with top quality.',
-    srv1_title:'Web Development',srv1_desc:'Modern, responsive and fast websites built with the best technologies.',
-    srv2_title:'App Development',srv2_desc:'Mobile apps for Android and iOS with custom design and high performance.',
-    srv3_title:'Bot Development',srv3_desc:'Telegram, Soroush and WhatsApp bots for automation. Our Soroush bot:',
-    srv4_title:'Professional Translation',srv4_desc:'English to Persian translation and vice versa, with high accuracy and natural tone.',
-    srv5_title:'Host & Domain',srv5_desc:'Buy high-speed hosting and domains at the best price with full support.',
-    srv6_title:'Site Optimization',srv6_desc:'Increase speed, improve SEO and fix technical issues of your site.',
-    process_tag:'Our Process',
-    process_title_1:'How we',process_title_2:'work',
-    process_desc:'A clear and professional path from idea to final delivery.',
-    step1_title:'Consultation & Idea',step1_desc:'You contact us, share your idea and we suggest the best solution.',
-    step2_title:'Design & Planning',step2_desc:'We design the project roadmap and set a precise delivery timeline.',
-    step3_title:'Execution & Development',step3_desc:'The project is built with the best technologies with reports at each stage.',
-    step4_title:'Delivery & Support',step4_desc:'The final project is delivered with free support for a certain period.',
-    cta_title:'Ready to start your project?',
-    cta_desc:'Contact us now and turn your idea into reality.',
-    cta_btn:'Start Conversation',
-    contact_tag:'Contact Us',
-    contact_title_1:'Let\'s',contact_title_2:'stay',contact_title_3:'in touch',
-    contact_desc:'Contact us through any way you prefer.',
-    c_soroush:'Soroush',c_bot:'Soroush Bot',c_channel:'Official Channel',
-    c_github:'GitHub',c_phone:'Phone',c_email:'Email',
-    footer_copy:'© All rights reserved by the creator'
-  }
-};
+const translations={
+fa:{
+nav_services:"خدمات",nav_process:"فرآیند",nav_team:"تیم ما",nav_contact:"ارتباط",nav_cta:"شروع پروژه",
+hero_badge:"یک تیم کوچک، با ایده‌های بزرگ",hero_1:"ایده‌ات را",hero_2:" دیجیتال",hero_3:" می‌کنیم.",
+hero_desc:"WEBAK یک تیم نوجوان و خلاق برای ساخت سایت، اپلیکیشن، بات و تجربه‌های دیجیتال است؛ جایی که ایده فقط روی کاغذ نمی‌ماند.",
+hero_btn1:"شروع یک پروژه ↗",hero_btn2:"آشنایی با تیم",
+trust1:"ایده تا اجرا",trust2:"تمرکز روی سرعت",trust3:"طراحی اختصاصی",trust4:"یادگیری و رشد",
+services_kicker:"WHAT WE DO",services_title1:"چیزهایی می‌سازیم که",services_title2:"دیده می‌شوند.",
+services_desc:"از اولین طرح تا نسخه نهایی، روی ظاهر، تجربه کاربری و عملکرد تمرکز می‌کنیم.",
+s1t:"وب‌سایت‌های مدرن",s1d:"سایت‌های سریع، ریسپانسیو و حرفه‌ای که برای برند شما طراحی می‌شوند، نه برای یک قالب تکراری.",
+s2t:"اپلیکیشن",s2d:"ایده موبایلی شما را به محصولی کاربردی با رابط کاربری تمیز و تجربه‌ای روان تبدیل می‌کنیم.",
+s3t:"بات و اتوماسیون",s3d:"بات‌های کاربردی برای سرویس‌های مختلف، از پاسخ‌گویی و مدیریت تا اتوماسیون کارهای تکراری.",
+s4t:"طراحی و هویت دیجیتال",s4d:"از ترکیب رنگ و تایپوگرافی تا ساخت یک رابط کاربری منسجم، ظاهر محصول را به بخشی از هویت آن تبدیل می‌کنیم.",
+s5t:"ترجمه و محتوای دیجیتال",s5d:"ترجمه و آماده‌سازی محتوای فارسی و انگلیسی با تمرکز روی خوانایی و لحن طبیعی.",
+s6t:"بهینه‌سازی و توسعه",s6d:"رفع مشکلات فنی، بهبود سرعت، مرتب‌سازی ساختار و آماده‌سازی پروژه برای رشد آینده.",
+process_kicker:"HOW IT WORKS",process_title1:"از ایده تا",process_title2:"ساختن.",
+process_desc:"فرآیند ما ساده است؛ ارتباط شفاف، طراحی فکرشده و اجرای مرحله‌به‌مرحله.",
+p1t:"کشف ایده",p1d:"نیاز، هدف و مخاطب پروژه را مشخص می‌کنیم تا قبل از ساختن، بدانیم دقیقاً چه چیزی باید ساخته شود.",
+p2t:"طراحی مسیر",p2d:"ساختار، تجربه کاربری و مسیر اجرای پروژه را مشخص می‌کنیم و کار را به مراحل قابل مدیریت تقسیم می‌کنیم.",
+p3t:"ساخت و تست",p3d:"توسعه انجام می‌شود، بخش‌ها تست می‌شوند و در طول مسیر بازخوردها را وارد محصول می‌کنیم.",
+p4t:"تحویل و رشد",p4d:"نسخه نهایی تحویل می‌شود و ساختار پروژه طوری آماده می‌شود که بتواند در آینده توسعه پیدا کند.",
+team_kicker:"THE TEAM",team_title1:"پشت WEBAK،",team_title2:"ما هستیم.",
+team_desc:"یک تیم جوان که از یادگیری، ساختن و امتحان کردن ایده‌های جدید انرژی می‌گیرد.",
+founder:"بنیان‌گذار WEBAK",engineer:"مهندس / توسعه‌دهنده",engineer2:"مهندس / عضو تیم",engineer3:"مهندس / عضو تیم",
+years:"ساله",years2:"ساله",years3:"ساله",years4:"ساله",
+team_note:"بله، اعضای تیم ما هنوز نوجوان هستند؛ اما",team_note_strong:"یادگیری، ساختن و تجربه کردن را از همین حالا جدی گرفته‌ایم.",
+team_more:"معرفی کامل مهندسین ↗",
+cta_title:"یک ایده داری؟ بیایید بسازیمش.",cta_desc:"پروژه‌های خوب از یک گفت‌وگوی ساده شروع می‌شوند.",cta_btn:"شروع گفتگو ↗",
+contact_kicker:"CONTACT",contact_title1:"بیا در",contact_title2:"ارتباط باشیم.",contact_desc:"از هر راهی که راحت‌تری با ما تماس بگیر.",
+contact_big:"حرفی برای ساختن داری؟",contact_big_desc:"ایده‌ات را بگو؛ از یک سایت کوچک تا یک پروژه کامل، اول درباره چیزی که می‌خواهی صحبت می‌کنیم.",
+c1:"سروش",c2:"بات سروش",c3:"کانال رسمی",c4:"گیت‌هاب",c5:"شماره تماس",c6:"ایمیل",
+f1:"خدمات",f2:"تیم",f3:"ارتباط",copy:"© WEBAK — ساخته‌شده با ایده، کد و کمی دیوانگی 🚀"
+},
+en:{
+nav_services:"Services",nav_process:"Process",nav_team:"Our Team",nav_contact:"Contact",nav_cta:"Start Project",
+hero_badge:"A small team with big ideas",hero_1:"We make your",hero_2:" ideas",hero_3:" digital.",
+hero_desc:"WEBAK is a young creative team building websites, apps, bots and digital experiences — where ideas don't stay on paper.",
+hero_btn1:"Start a project ↗",hero_btn2:"Meet the team",
+trust1:"Idea to execution",trust2:"Speed focused",trust3:"Custom design",trust4:"Always learning",
+services_kicker:"WHAT WE DO",services_title1:"We build things that",services_title2:"get noticed.",
+services_desc:"From the first concept to the final release, we focus on design, experience and performance.",
+s1t:"Modern Websites",s1d:"Fast, responsive and professional websites designed around your brand instead of a repeated template.",
+s2t:"Applications",s2d:"We turn mobile ideas into useful products with clean interfaces and smooth experiences.",
+s3t:"Bots & Automation",s3d:"Useful bots for different services, from responses and management to repetitive-task automation.",
+s4t:"Digital Design & Identity",s4d:"From color and typography to a consistent interface, we make visual design part of the product identity.",
+s5t:"Translation & Content",s5d:"Persian and English translation and digital content preparation with a focus on clarity and natural tone.",
+s6t:"Optimization & Development",s6d:"Technical fixes, speed improvements, cleaner structures and preparation for future growth.",
+process_kicker:"HOW IT WORKS",process_title1:"From idea to",process_title2:"building.",
+process_desc:"Our process is simple: clear communication, thoughtful design and step-by-step execution.",
+p1t:"Discover the idea",p1d:"We define the project's needs, goal and audience before building anything.",
+p2t:"Design the path",p2d:"We shape the structure, user experience and development path into manageable stages.",
+p3t:"Build & test",p3d:"We develop, test and continuously bring feedback into the product.",
+p4t:"Deliver & grow",p4d:"The final version is delivered with a structure that can keep evolving.",
+team_kicker:"THE TEAM",team_title1:"Behind WEBAK,",team_title2:"there's us.",
+team_desc:"A young team powered by learning, building and trying new ideas.",
+founder:"WEBAK Founder",engineer:"Engineer / Developer",engineer2:"Engineer / Team Member",engineer3:"Engineer / Team Member",
+years:"years old",years2:"years old",years3:"years old",years4:"years old",
+team_note:"Yes, our team members are still teenagers — but",team_note_strong:"we take learning, building and real experience seriously.",
+team_more:"Full engineer profiles ↗",
+cta_title:"Have an idea? Let's build it.",cta_desc:"Great projects often start with a simple conversation.",cta_btn:"Start a conversation ↗",
+contact_kicker:"CONTACT",contact_title1:"Let's",contact_title2:"stay in touch.",contact_desc:"Reach us through whichever way you prefer.",
+contact_big:"Have something to build?",contact_big_desc:"Tell us your idea. From a small website to a complete project, let's talk about what you need first.",
+c1:"Soroush",c2:"Soroush Bot",c3:"Official Channel",c4:"GitHub",c5:"Phone",c6:"Email",
+f1:"Services",f2:"Team",f3:"Contact",copy:"© WEBAK — Built with ideas, code and a little madness 🚀"
+}};
 
-const typingWords = {
-  fa:['ساخت اپلیکیشن 📱','ساخت وب‌سایت 💻','ساخت بات 🤖','ترجمه تخصصی 🌐','خرید هاست و دامنه ☁️','بهینه‌سازی سایت ⚡'],
-  en:['App Development 📱','Web Development 💻','Bot Development 🤖','Translation 🌐','Host & Domain ☁️','Site Optimization ⚡']
-};
+let lang="fa";
+let theme="dark";
 
-/* ==================== STATE ==================== */
-let currentLang='fa';
-let currentTheme='dark';
-let typingTimer=null;
-
-/* ==================== LANGUAGE ==================== */
-function setLanguage(lang){
-  currentLang=lang;
-  const html=document.documentElement;
-  html.lang=lang;
-  html.dir=lang==='fa'?'rtl':'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key=el.dataset.i18n;
-    if(translations[lang][key]) el.textContent=translations[lang][key];
-  });
-  document.getElementById('langBtn').querySelector('.lang-text').textContent=lang==='fa'?'EN':'فا';
-  restartTyping();
-  try{localStorage.setItem('webak-lang',lang);}catch(e){}
+function applyLang(){
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="fa"?"rtl":"ltr";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+   const key=el.dataset.i18n;
+   if(translations[lang][key]) el.textContent=translations[lang][key];
+ });
+ document.getElementById("langBtn").textContent=lang==="fa"?"EN":"فا";
+ localStorage.setItem("webak-lang",lang);
 }
-
-/* ==================== THEME ==================== */
-function setTheme(theme){
-  currentTheme=theme;
-  document.documentElement.setAttribute('data-theme',theme);
-  document.getElementById('themeBtn').textContent=theme==='dark'?'🌙':'☀️';
-  try{localStorage.setItem('webak-theme',theme);}catch(e){}
+function applyTheme(){
+ document.documentElement.dataset.theme=theme;
+ document.getElementById("themeBtn").textContent=theme==="dark"?"☾":"☀";
+ localStorage.setItem("webak-theme",theme);
 }
+document.getElementById("langBtn").onclick=()=>{lang=lang==="fa"?"en":"fa";applyLang()};
+document.getElementById("themeBtn").onclick=()=>{theme=theme==="dark"?"light":"dark";applyTheme()};
 
-document.getElementById('themeBtn').addEventListener('click',()=>setTheme(currentTheme==='dark'?'light':'dark'));
-document.getElementById('langBtn').addEventListener('click',()=>setLanguage(currentLang==='fa'?'en':'fa'));
-
-/* ==================== PARTICLES ==================== */
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-let particles=[];
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
-resize();addEventListener('resize',resize);
-
-for(let i=0;i<22;i++){
-  const isOrange = i < 5;
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.2+0.4,
-    vx:(Math.random()-0.5)*0.15,
-    vy:(Math.random()-0.5)*0.15,
-    o: isOrange ? Math.random()*0.3+0.15 : Math.random()*0.2+0.05,
-    color: isOrange ? '255,107,0' : '200,210,220'
-  });
-}
-function drawParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>canvas.width)p.vx*=-1;
-    if(p.y<0||p.y>canvas.height)p.vy*=-1;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(${p.color},${p.o})`;
-    if(p.color==='255,107,0'){
-      ctx.shadowBlur=8;ctx.shadowColor='rgba(255,107,0,0.6)';
-    }else{
-      ctx.shadowBlur=0;
-    }
-    ctx.fill();
-  });
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x;
-      const dy=particles[i].y-particles[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<120){
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x,particles[i].y);
-        ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.strokeStyle=`rgba(255,107,0,${0.03*(1-d/120)})`;
-        ctx.lineWidth=0.4;ctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(drawParticles);
-}
-drawParticles();
-
-/* ==================== NAVBAR ==================== */
-const nav=document.getElementById('nav');
-addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>50);});
-
-/* ==================== TYPING ==================== */
-let wi=0,ci=0,deleting=false;
-const typingEl=document.getElementById('typing');
-function type(){
-  const words=typingWords[currentLang];
-  const word=words[wi];
-  if(!deleting){
-    typingEl.textContent=word.substring(0,ci+1);ci++;
-    if(ci===word.length){deleting=true;typingTimer=setTimeout(type,1800);return;}
-  }else{
-    typingEl.textContent=word.substring(0,ci-1);ci--;
-    if(ci===0){deleting=false;wi=(wi+1)%words.length;}
-  }
-  typingTimer=setTimeout(type,deleting?45:95);
-}
-function restartTyping(){
-  clearTimeout(typingTimer);
-  wi=0;ci=0;deleting=false;
-  typingEl.textContent='';
-  type();
-}
-type();
-
-/* ==================== REVEAL ==================== */
-const reveals=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('active'),i*70);
-      io.unobserve(e.target);
-    }
-  });
-},{threshold:0.1});
-reveals.forEach(r=>io.observe(r));
-
-/* ==================== LOAD PREFS ==================== */
 try{
-  const sL=localStorage.getItem('webak-lang');
-  const sT=localStorage.getItem('webak-theme');
-  if(sL==='fa'||sL==='en') setLanguage(sL);
-  if(sT==='dark'||sT==='light') setTheme(sT);
+ const savedLang=localStorage.getItem("webak-lang");
+ const savedTheme=localStorage.getItem("webak-theme");
+ if(savedLang==="fa"||savedLang==="en")lang=savedLang;
+ if(savedTheme==="dark"||savedTheme==="light")theme=savedTheme;
 }catch(e){}
+applyLang();applyTheme();
+
+/* navbar */
+const nav=document.getElementById("nav");
+addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>40));
+
+/* reveal */
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+   if(entry.isIntersecting){
+     entry.target.classList.add("show");
+     observer.unobserve(entry.target);
+   }
+ });
+},{threshold:.1});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* particles */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+let particles=[];
+function resize(){
+ canvas.width=innerWidth;
+ canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+for(let i=0;i<28;i++){
+ particles.push({
+   x:Math.random()*innerWidth,
+   y:Math.random()*innerHeight,
+   r:Math.random()*1.2+.3,
+   vx:(Math.random()-.5)*.12,
+   vy:(Math.random()-.5)*.12,
+   a:Math.random()*.18+.04,
+   orange:i<6
+ });
+}
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ particles.forEach(p=>{
+   p.x+=p.vx;p.y+=p.vy;
+   if(p.x<0||p.x>canvas.width)p.vx*=-1;
+   if(p.y<0||p.y>canvas.height)p.vy*=-1;
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+   ctx.fillStyle=p.orange?`rgba(255,107,0,${p.a})`:`rgba(180,195,215,${p.a})`;
+   ctx.fill();
+ });
+ requestAnimationFrame(draw);
+}
+draw();
 </script>
 </body>
 </html>
